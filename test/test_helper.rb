@@ -3,9 +3,14 @@ require 'minitest/pride'
 require 'capybara/minitest'
 require './app/controllers/personal_site'
 
-Capybara.app = PersonalSite
+Capybara.app = MyRackApp
 
 class CapybaraTestCase < Minitest::Test
   include Capybara::DSL
   include Capybara::Minitest::Assertions
+
+   def teardown
+    Capybara.reset_sessions!
+    Capybara.use_default_driver
+  end
 end
